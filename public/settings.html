@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <html>
-    <body>
-      <select id="switcher">
-            <option value="epoxy">Epoxy</option>
-            <option value="bare">Bare</option>
-            <option value="libcurl">Libcurl</option>
-        </select>
-    <input type="text" id="wisplink">
-      <script>
-        function setWebSocketURL() {
-            const protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-L
-            const wsURL = `${protocol}://${location.host}/wisp/`;
-            
-            document.getElementById('webSocketInput').value = wsURL;
-        }
-        window.onload = setWebSocketURL;
-    </script>
-    </body>
-    <footer>
-      <script src="index.js">
-    </footer>
-  </html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings Page</title>
+</head>
+<body>
+    <select id="switcher">
+        <option value="epoxy">Epoxy</option>
+        <option value="bare">Bare</option>
+        <option value="libcurl">Libcurl</option>
+    </select>
+    
+    <input type="text" id="wispInput" placeholder="WISP URL" aria-label="WISP URL">
+    <input type="text" id="bareInput" placeholder="Bare URL" aria-label="Bare URL">
+
+    <!-- Search Engine Selector -->
+    <select id="searchEngineSelector">
+        <option value="google">Google</option>
+        <option value="bing">Bing</option>
+        <option value="yahoo">Yahoo</option>
+        <option value="duckduckgo">DuckDuckGo</option>
+        <option value="ecosia">Ecosia</option>
+    </select>
+    
+    <script src="index.js"></script>
+</body>
+</html>
