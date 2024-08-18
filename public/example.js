@@ -1,7 +1,8 @@
-const connection = new BareMux.BareMuxConnection("/baremux/worker.js")
+const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
 const wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
-const bareUrl = (location.protocol === "https:" ? "https" : "http") + "://" + location.host + "/bare/"
-document // makes it so you can press enter to submit as opposed to just being able to press a button
+const bareUrl = (location.protocol === "https:" ? "https" : "http") + "://" + location.host + "/bare/";
+
+document
     .getElementById("urlInput")
     .addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
@@ -13,7 +14,7 @@ document // makes it so you can press enter to submit as opposed to just being a
 document.getElementById("searchButton").onclick = async function (event) {
     event.preventDefault();
 
-    let url = document.getElementById("urlInput").value; // if no periods are detected in the input, search google instead
+    let url = document.getElementById("urlInput").value; // if no periods are detected in the input, search Google instead
     let searchUrl = "https://www.google.com/search?q=";
 
     if (!url.includes(".")) {
@@ -23,9 +24,11 @@ document.getElementById("searchButton").onclick = async function (event) {
             url = "https://" + url;
         }
     }
-	if (!await connection.getTransport()) {
-		await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
-	}
+
+    if (!await connection.getTransport()) {
+        await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
+    }
+
     iframeWindow.src = __uv$config.prefix + __uv$config.encodeUrl(url);
 };
 
@@ -37,5 +40,8 @@ document.getElementById("switcher").onselect = async function (event) {
         case "bare":
             await connection.setTransport("/baremod/index.mjs", [bareUrl]);
             break;
+        case "libcurl":
+            await connection.setTransport("/libcurl/index.mjs", [{ wisp: wispUrl }]);
+            break;
     }
-}
+};
