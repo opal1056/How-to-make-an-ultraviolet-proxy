@@ -7,6 +7,24 @@
             <option value="bare">Bare</option>
             <option value="libcurl">Libcurl</option>
         </select>
+      <script>
+        function setWebSocketURL() {
+            // Get the protocol (ws or wss) based on the current protocol
+            const protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+            
+            // Construct the WebSocket URL
+            const wsURL = `${protocol}://${location.host}/wisp/`;
+            
+            // Set the value of the input box
+            document.getElementById('webSocketInput').value = wsURL;
+        }
+        
+        // Set the WebSocket URL when the page loads
+        window.onload = setWebSocketURL;
+    </script>
+</head>
+<body>
+    <input type="text" id="wispUrl">
     </body>
     <footer>
       <script src="index.js">
