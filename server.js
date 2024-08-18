@@ -8,6 +8,7 @@ import express from "express";
 import { createServer } from "node:http";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { libcurlPath } from "@mercuryworkshop/libcurl-transport";
 
 const bare = createBareServer("/bare/")
 const __dirname = join(fileURLToPath(import.meta.url), "..");
@@ -19,6 +20,7 @@ app.use("/uv/", express.static(uvPath));
 app.use("/epoxy/", express.static(epoxyPath));
 app.use("/baremux/", express.static(baremuxPath));
 app.use("/baremod/", express.static(bareModulePath));
+app.use("/libcurl/", express.static(libcurlPath));
 
 app.use((req, res) => {
     res.status(404);
